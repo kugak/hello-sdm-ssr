@@ -1,12 +1,11 @@
 <script>
-  import { onDestroy, onMount } from "svelte";
   import { blur, fade } from "svelte/transition";
   // Images
   import pharmaPlus from "../../images/pharma-plus.png";
 
   export let data;
   const { services } = data;
-  console.log(services);
+  //console.log(services);
 
   let error = null;
   let lastUpdated = null;
@@ -28,20 +27,20 @@
     setInterval(updateLastUpdated, 60000);
   }
 
-  onMount(() => {
-    fetchData(); // Fetch data immediately on mount
-  });
+  // onMount(() => {
+  //   fetchData(); // Fetch data immediately on mount
+  // });
 
   // Fetch data every minute
-  let interval;
-  onMount(() => {
-    interval = setInterval(fetchData, 60000);
-  });
+  // let interval;
+  // onMount(() => {
+  //   interval = setInterval(fetchData, 60000);
+  // });
 
   // Clear interval on component destruction
-  onDestroy(() => {
-    clearInterval(interval);
-  });
+  // onDestroy(() => {
+  //   clearInterval(interval);
+  // });
 </script>
 
 <section class="pharmacy pharmacy__service">
@@ -93,7 +92,7 @@
     --primary-font: "GT Eesti Pro Display";
   }
   :global(body) {
-    background-color: #1b4655;
+    background-color: #1d551b;
     height: 100%;
     margin: 0;
     color: #fff;
@@ -105,7 +104,7 @@
     margin: 0 auto;
     position: relative;
     z-index: 1;
-    background: #1b4655;
+    /* background: #1b4655; */
     max-height: 1920px;
     height: 100vh;
     min-height: 1480px;
