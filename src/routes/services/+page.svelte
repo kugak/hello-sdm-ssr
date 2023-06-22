@@ -1,46 +1,17 @@
 <script>
-  import { blur, fade } from "svelte/transition";
-  // Images
   import pharmaPlus from "../../images/pharma-plus.png";
 
   export let data;
   const { services } = data;
-  //console.log(services);
 
   let error = null;
-  let lastUpdated = null;
   let currentTime = new Date().toLocaleTimeString([], {
     hour: "numeric",
     minute: "2-digit",
   });
-  let currentDay = "";
   let timeParts = currentTime.split(" "); // Split the time string by space
   let time = timeParts[0]; // Extract the time without AM/PM
   let amPm = timeParts[1]; // Extract the AM/PM designation
-  let showContent = false; // Flag to show/hide content
-
-  console.log(time); // Output: "9:42"
-  console.log(amPm); // Output: "AM"
-
-  function updateLastUpdated() {
-    lastUpdated = new Date().toLocaleTimeString(); // Update last updated timestamp
-    setInterval(updateLastUpdated, 60000);
-  }
-
-  // onMount(() => {
-  //   fetchData(); // Fetch data immediately on mount
-  // });
-
-  // Fetch data every minute
-  // let interval;
-  // onMount(() => {
-  //   interval = setInterval(fetchData, 60000);
-  // });
-
-  // Clear interval on component destruction
-  // onDestroy(() => {
-  //   clearInterval(interval);
-  // });
 </script>
 
 <section class="pharmacy pharmacy__service">
@@ -54,7 +25,7 @@
         {#if services.length > 0}
           <!-- Display the fetched data with fade-in effect -->
           {#each services as service}
-            <p in:blur out:blur>{service.name}</p>
+            <p>{service.name}</p>
           {/each}
         {:else if error !== null}
           <!-- Display error message -->
@@ -72,10 +43,10 @@
   </div>
 
   <!-- Time -->
-  <div class="service__date" in:blur out:fade>
+  <div class="service__date">
     <div id="time">
-      <span in:blur out:fade>{time}</span>
-      <span class="ampm" in:fade out:fade>{amPm}</span>
+      <span>{time}</span>
+      <span class="ampm">{amPm}</span>
     </div>
   </div>
 </section>
@@ -92,7 +63,7 @@
     --primary-font: "GT Eesti Pro Display";
   }
   :global(body) {
-    background-color: #1d551b;
+    background-color: #1b4655;
     height: 100%;
     margin: 0;
     color: #fff;

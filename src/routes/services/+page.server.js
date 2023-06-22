@@ -3,11 +3,9 @@
 export const load = ({ fetch, url }) => {
   
   const fetchServices = async () => {
-    console.log('fetch ssr');
     const searchParams = new URLSearchParams(url.search);
     const pageId = searchParams.get("pid") || "JPDW7_bTYb";
     const tableId = searchParams.get("tid") || "grid-vfXh3vEkTg";
-    console.log(pageId);
     try {
       const res = await fetch(`https://coda.io/apis/v1/docs/${pageId}/tables/${tableId}/rows?useColumnNames=true&valueFormat=rich&query=isPlaying:"true"`, {
         headers: {
@@ -22,7 +20,6 @@ export const load = ({ fetch, url }) => {
       }
 
       const data = await res.json();
-      //console.log(data);
 
       return data.items;
     } catch (error) {
