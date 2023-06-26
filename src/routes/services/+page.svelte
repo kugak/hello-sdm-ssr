@@ -1,8 +1,44 @@
 <script>
+  import { onMount } from "svelte";
+  import { page } from "$app/stores";
   import pharmaPlus from "../../images/pharma-plus.png";
 
+  // URL Params
+  const showClock = $page.url.searchParams.get("showClock") || "false";
+
   export let data;
-  const { services } = data;
+  let services = [];
+
+  // Define storage object with local storage fallback
+  let storage = null;
+  try {
+    // Attempt to use local storage
+    storage = localStorage;
+  } catch (error) {
+    // Local storage not available, fallback to in-memory object
+    console.warn("Local storage is not available. Falling back to in-memory storage.");
+    storage = {
+      getItem: () => null,
+      setItem: () => {},
+    };
+  }
+
+  // Check if services data exists in local storage
+  const storedServices = storage.getItem("services");
+  if (storedServices) {
+    try {
+      services = JSON.parse(storedServices);
+    } catch (error) {
+      console.error("Error parsing stored services:", error);
+    }
+  } else {
+    // Services data not found in local storage, use initial data from API
+    services = data.services;
+
+    // Store the services data in local storage
+    storage.setItem("services", JSON.stringify(services));
+  }
+
 
   let error = null;
   let currentTime = new Date().toLocaleTimeString([], {
@@ -12,6 +48,22 @@
   let timeParts = currentTime.split(" "); // Split the time string by space
   let time = timeParts[0]; // Extract the time without AM/PM
   let amPm = timeParts[1]; // Extract the AM/PM designation
+
+  // Offline
+  // onMount(() => {
+  //   // Register the service worker
+  //   if ("serviceWorker" in navigator) {
+  //     navigator.serviceWorker
+  //       .register("/service-worker.js")
+  //       .then((registration) => {
+  //         console.log("Service Worker registered:", registration);
+  //       })
+  //       .catch((error) => {
+  //         console.error("Service Worker registration failed:", error);
+  //       });
+  //   }
+  // });
+
 </script>
 
 <section class="pharmacy pharmacy__service">
@@ -45,9 +97,13 @@
   <!-- Time -->
   <div class="service__date">
     <div id="time">
+      {#if showClock == "true"}
       <span>{time}</span>
       <span class="ampm">{amPm}</span>
+      {/if}
+
     </div>
+
   </div>
 </section>
 
