@@ -32,7 +32,7 @@ export const load = ({ fetch, url }) => {
         title: "Error fetching data from Coda API",
         text: error.message,
         aggregationKey: "",
-        eventType: "error",
+        alert_type: "error",
         deviceName: "",
         host: "",
         priority: "normal",
@@ -47,14 +47,14 @@ export const load = ({ fetch, url }) => {
       ],
       };
 
-      // await fetch(datadogEndpoint, {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     'DD-API-KEY': datadogApiKey,
-      //   },
-      //   body: JSON.stringify(logPayload),
-      // });
+      await fetch(datadogEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'DD-API-KEY': datadogApiKey,
+        },
+        body: JSON.stringify(logPayload),
+      });
 
       throw error;
     }

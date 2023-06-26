@@ -32,7 +32,7 @@ export const load = ({ fetch, url }) => {
          title: "Error fetching data from Coda API",
         text: error.message,
         aggregationKey: "",
-        eventType: "error",
+        alert_type: "error",
         deviceName: "",
         host: "",
         priority: "normal",
