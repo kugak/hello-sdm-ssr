@@ -1,5 +1,4 @@
 <script>
-  import { onMount } from "svelte";
   import { page } from "$app/stores";
   import pharmaPlus from "../../images/pharma-plus.png";
 
@@ -48,21 +47,6 @@
   let timeParts = currentTime.split(" "); // Split the time string by space
   let time = timeParts[0]; // Extract the time without AM/PM
   let amPm = timeParts[1]; // Extract the AM/PM designation
-
-  // Offline
-  // onMount(() => {
-  //   // Register the service worker
-  //   if ("serviceWorker" in navigator) {
-  //     navigator.serviceWorker
-  //       .register("/service-worker.js")
-  //       .then((registration) => {
-  //         console.log("Service Worker registered:", registration);
-  //       })
-  //       .catch((error) => {
-  //         console.error("Service Worker registration failed:", error);
-  //       });
-  //   }
-  // });
 
 </script>
 
