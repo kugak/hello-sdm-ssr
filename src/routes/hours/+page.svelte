@@ -1,7 +1,6 @@
 <script>
     import { onMount } from 'svelte';
     import { page } from "$app/stores";
-
   
     // URL Params
     const showClock = $page.url.searchParams.get("showClock") || "false";
@@ -9,46 +8,49 @@
     export let data;
     let hours = data.hours;
     let openNow = data.hours.open_now;
-
-    // console.log(openNow);
-
-    const hoursStringArray = data.hours.weekday_text;
-    // console.log(hoursStringArray);
-
-    const hoursArray = hoursStringArray.map(item => {
+  
+    let hoursArray = [];
+    let time = ''; // Declare the time variable
+    let amPm = ''; // Declare the amPm variable
+  
+    onMount(() => {
+      hoursArray = data.hours.weekday_text.map(item => {
         const [day, timeRange] = item.split(': ');
-  let start, end;
-
-  if (timeRange === 'Open 24 hours') {
-    start = 'Open 24 hours';
-    end = '';
-  } else {
-    [start, end] = timeRange.split('–').map(time => time.replace(/\s+/g, ''));
-  }
-
-  const formattedStartTime = start === '12:00AM' ? 'Midnight' : start.toLowerCase();
-  const formattedEndTime = end === '12:00AM' ? 'Midnight' : end.toLowerCase();
-
-  return {
-    day: day.trim().slice(0, 3).toUpperCase(),
-    start: formattedStartTime,
-    end: formattedEndTime
-  };
+        let start, end;
+  
+        if (timeRange === 'Open 24 hours') {
+          start = 'Open 24 hours';
+          end = '';
+        } else {
+          [start, end] = timeRange.split('–').map(time => time.replace(/\s+/g, ''));
+        }
+  
+        const formattedStartTime = start === '12:00AM' ? 'Midnight' : start.toLowerCase();
+        const formattedEndTime = end === '12:00AM' ? 'Midnight' : end.toLowerCase();
+  
+        return {
+          day: day.trim().slice(0, 3).toUpperCase(),
+          start: formattedStartTime,
+          end: formattedEndTime
+        };
+      });
+  
+      let currentTime = new Date().toLocaleTimeString([], {
+        hour: "numeric",
+        minute: "2-digit",
+      });
+  
+      let timeParts = currentTime.split(" "); // Split the time string by space
+      time = timeParts[0]; // Assign the value to the time variable
+      amPm = timeParts[1]; // Assign the value to the amPm variable
     });
-
-const getDayOfWeek = (day) => {
-    const daysOfWeek = ['SUN','MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-    return daysOfWeek[day];
-  };
-        
+  
+    const getDayOfWeek = (day) => {
+      const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+      return daysOfWeek[day];
+    };
+  
     let error = null;
-    let currentTime = new Date().toLocaleTimeString([], {
-      hour: "numeric",
-      minute: "2-digit",
-    });
-    let timeParts = currentTime.split(" "); // Split the time string by space
-    let time = timeParts[0]; // Extract the time without AM/PM
-    let amPm = timeParts[1]; // Extract the AM/PM designation
   
   </script>
   
@@ -63,31 +65,30 @@ const getDayOfWeek = (day) => {
           <div class="store-hours">
             {#each hoursArray as { day, start, end }}
             <div class="day {day === getDayOfWeek(new Date().getDay()) && openNow ? 'open-now' : ''}">
-                <span>{day}</span>
-                <span>{start} {#if end} - {end} {/if}</span>
-              </div>
+              <span>{day}</span>
+              <span>{start} {#if end} - {end} {/if}</span>
+            </div>
             {/each}
           </div>
         </div>
       </div>
     </div>
   </section>
-{:else}
-  <p>Loading...</p>
-{/if}
-      <!-- Time -->
-      <div class="service__date">
-        <div id="time">
-          {#if showClock == "true"}
-          <span>{time}</span>
-          <span class="ampm">{amPm}</span>
-          {/if}
-    
-        </div>
-    
-      </div>
+  {:else}
+  <p></p>
+  {/if}
   
+  <!-- Time -->
+  <div class="service__date">
+    <div id="time">
+      {#if showClock == "true"}
+      <span>{time}</span>
+      <span class="ampm">{amPm}</span>
+      {/if}
+    </div>
+  </div>
   <style>
+    
         .container {
       display: flex;
       justify-content: center;
