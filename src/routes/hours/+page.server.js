@@ -27,7 +27,7 @@ export const load = ({ fetch, url }) => {
     //   const datadogTags = ['app:sdm-ssr', 'env:production'];
 
       const logPayload = {
-        title: "Error fetching data from Coda API",
+        title: "Error fetching data from Google Maps API",
         text: error.message,
         aggregationKey: "",
         alert_type: "error",
