@@ -1,42 +1,23 @@
 <script>
     import { onMount } from 'svelte';
     import { page } from "$app/stores";
+    import careImg from "../../images/care.png";
+    import appImg from "../../images/app.png";
+    import pharmacyImg from "../../images/pharmacy.png";
+    import onlineImg from "../../images/online.png";
+    import qrImg from "../../images/qr-code.png";
+
   
     // URL Params
     const showClock = $page.url.searchParams.get("showClock") || "false";
     console.log(showClock);
-  
-    export let data;
-    let hours = data.hours;
-    let openNow = data.hours.open_now;
-  
-    let hoursArray = [];
+    
     let time = ''; // Declare the time variable
     let amPm = ''; // Declare the amPm variable
   
     onMount(() => {
-      hoursArray = data.hours.weekday_text.map(item => {
-        const [day, timeRange] = item.split(': ');
-        let start, end;
-  
-        if (timeRange === 'Open 24 hours') {
-          start = 'Open 24 hours';
-          end = '';
-        } else {
-          [start, end] = timeRange.split('–').map(time => time.replace(/\s+/g, ''));
-        }
-  
-        const formattedStartTime = start === '12:00AM' ? 'Midnight' : start.toLowerCase();
-        const formattedEndTime = end === '12:00AM' ? 'Midnight' : end.toLowerCase();
-  
-        return {
-          day: day.trim().slice(0, 3).toUpperCase(),
-          start: formattedStartTime,
-          end: formattedEndTime
-        };
-      });
-  
-      let currentTime = new Date().toLocaleTimeString([], {
+ 
+        let currentTime = new Date().toLocaleTimeString([], {
         hour: "numeric",
         minute: "2-digit",
       });
@@ -46,69 +27,118 @@
       amPm = timeParts[1]; // Assign the value to the amPm variable
     });
   
-    const getDayOfWeek = (day) => {
-      const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-      return daysOfWeek[day];
-    };
-  
-    let error = null;
-  
   </script>
   
-  {#if hoursArray.length > 0}
   <section class="pharmacy pharmacy__service">
     <div class="ph__container">
       <div class="ph__wrapper">
         <div class="ph__top-title">
-          <h2 class="ph__title">Store <span class="text-white">&</span> Pharmacy Hours</h2>
+          <h2 class="ph__title"><span class="text-white">Let us</span><br>help you</h2>
+          <p class="sub-title text-white">Book an appointment</p>
         </div>
-        <div class="container">
-          <div class="store-hours">
-            {#each hoursArray as { day, start, end }}
-            <div class="day {day === getDayOfWeek(new Date().getDay()) && openNow ? 'open-now' : ''}">
-              <span>{day}</span>
-              <span>{start} {#if end} - {end} {/if}</span>
-            </div>
-            {/each}
-          </div>
+        <div class="main-wrapper">
+            <div class="container">
+                <div class="left-column">
+                  <div class="icon"><img src={careImg} alt="Care Icon"></div>
+                </div>
+                <div class="right-column item-text">
+                  <p>See our Care Concierge</p>
+                </div>
+              </div>
+              <div class="container">
+                <div class="left-column">
+                  <div class="icon"><img src={pharmacyImg} alt="Pharmacy Icon"></div>
+                </div>
+                <div class="right-column item-text">
+                  <p>Enquire at the pharmacy desk</p>
+                </div>
+              </div>
+              <div class="container">
+                <div class="left-column">
+                  <div class="icon"><img src={appImg} alt="App Icon"></div>
+                </div>
+                <div class="right-column item-text">
+                  <p>Book on PC Health App</p>
+                </div>
+              </div>
+              <div class="container">
+                <div class="left-column">
+                  <div class="icon"><img src={onlineImg} alt="Online Icon"></div>
+                </div>
+                <div class="right-column item-text">
+                  <p>Book at shoppersdrugmart.ca/<br>shoppershealthplus</p>
+                </div>
+              </div>
+    
         </div>
+        
+
       </div>
     </div>
+       <!-- QR -->
+       <div class="qr_code">
+        <img src={qrImg} alt="Online Icon">
+      </div>
   </section>
-  {:else}
-  <p></p>
-  {/if}
+
+ 
   
- <!-- Time -->
- <div class="service__date">
-  <div class="qr-code"></div>
-  <div id="time">
-    {#if showClock == "true"}
-    <span>{time}</span>
-    <span class="ampm">{amPm}</span>
-    {/if}
+  <!-- Time -->
+  <div class="service__date">
+    <div class="qr-code"></div>
+    <div id="time">
+      <!-- {#if showClock == "true"} -->
+      <span>{time}</span>
+      <span class="ampm">{amPm}</span>
+      <!-- {/if} -->
+    </div>
   </div>
-</div>
   <style>
-    
+
+    .text-white {
+        color: #fff;
+    }
+
+    .main-wrapper {
+    color: #fff;
+    font-size: 2.7rem;
+}
+
         .container {
       display: flex;
-      justify-content: center;
-      font-size: 3rem;
-    }
-        .store-hours {
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-      width: 600px;
-      color: #62b5e5;
-
+      width: 700px;
     }
 
-    .store-hours .day {
+    .left-column {
       display: flex;
-      justify-content: space-between;
+      align-items: center;
     }
+
+    .right-column {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
+    }
+
+    .icon {
+      width: 65px; /* Adjust the width of the icon as needed */
+      height: 65px; /* Adjust the height of the icon as needed */
+      margin-right: 50px; /* Adjust the spacing between the icon and text as needed */
+    }
+    p.sub-title {
+    text-align: center;
+    font-size: 4rem;
+    font-weight: 100;
+}
+
+.qr_code {
+    left: -5vw;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    height: 92vh;
+    justify-content: flex-end;
+}
 
     @font-face {
       font-family: "GT Eesti Pro Display";
@@ -133,10 +163,6 @@
       align-items: center;
     }
 
-    .day.open-now, .text-white {
-    color: white;
-  }
-  
     .pharmacy {
       max-width: 1080px;
       margin: 0 auto;
