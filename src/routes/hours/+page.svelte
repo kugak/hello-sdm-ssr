@@ -99,6 +99,8 @@
       flex-direction: column;
       gap: 25px;
       width: 600px;
+      color: #62b5e5;
+
     }
 
     .store-hours .day {
