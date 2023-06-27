@@ -145,7 +145,7 @@
     font-size: 2.7rem;
     letter-spacing: 1px;
     line-height: 90px;
-    color: #ffffff;
+    color: #fff;
     font-weight: 300;
     text-align: center;
     /* padding: 30px 20px; */
