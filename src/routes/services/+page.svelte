@@ -9,34 +9,35 @@
   let services = [];
 
   // Define storage object with local storage fallback
-  let storage = null;
-  try {
-    // Attempt to use local storage
-    storage = localStorage;
-  } catch (error) {
-    // Local storage not available, fallback to in-memory object
-    console.warn("Local storage is not available. Falling back to in-memory storage.");
-    storage = {
-      getItem: () => null,
-      setItem: () => {},
-    };
-  }
+  // let storage = null;
+  // try {
+  //   // Attempt to use local storage
+  //   storage = localStorage;
+  // } catch (error) {
+  //   // Local storage not available, fallback to in-memory object
+  //   console.warn("Local storage is not available. Falling back to in-memory storage.");
+  //   storage = {
+  //     getItem: () => null,
+  //     setItem: () => {},
+  //   };
+  // }
 
   // Check if services data exists in local storage
-  const storedServices = storage.getItem("services");
-  if (storedServices) {
-    try {
-      services = JSON.parse(storedServices);
-    } catch (error) {
-      console.error("Error parsing stored services:", error);
-    }
-  } else {
-    // Services data not found in local storage, use initial data from API
-    services = data.services;
+  // const storedServices = storage.getItem("services");
+  // if (storedServices) {
+  //   try {
+  //     services = JSON.parse(storedServices);
+  //   } catch (error) {
+  //     console.error("Error parsing stored services:", error);
+  //   }
+  // } else {
+  //   // Services data not found in local storage, use initial data from API
 
-    // Store the services data in local storage
-    storage.setItem("services", JSON.stringify(services));
-  }
+  //   // Store the services data in local storage
+  //   storage.setItem("services", JSON.stringify(services));
+  // }
+
+  services = data.services;
 
 
   let error = null;

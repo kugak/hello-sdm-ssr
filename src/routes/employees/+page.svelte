@@ -6,34 +6,36 @@
   let employees = [];
 
   // Define storage object with local storage fallback
-  let storage = null;
-  try {
-    // Attempt to use local storage
-    storage = localStorage;
-  } catch (error) {
-    // Local storage not available, fallback to in-memory object
-    console.warn("Local storage is not available. Falling back to in-memory storage.");
-    storage = {
-      getItem: () => null,
-      setItem: () => {},
-    };
-  }
+  // let storage = null;
+  // try {
+  //   // Attempt to use local storage
+  //   storage = localStorage;
+  // } catch (error) {
+  //   // Local storage not available, fallback to in-memory object
+  //   console.warn("Local storage is not available. Falling back to in-memory storage.");
+  //   storage = {
+  //     getItem: () => null,
+  //     setItem: () => {},
+  //   };
+  // }
 
-  // Check if employees data exists in local storage
-  const storedEmployees = storage.getItem("employees");
-  if (storedEmployees) {
-    try {
-      employees = JSON.parse(storedEmployees);
-    } catch (error) {
-      console.error("Error parsing stored employees:", error);
-    }
-  } else {
-    // Employees data not found in local storage, use initial data from API
-    employees = data.employees;
+  // // Check if employees data exists in local storage
+  // const storedEmployees = storage.getItem("employees");
+  // if (storedEmployees) {
+  //   try {
+  //     employees = JSON.parse(storedEmployees);
+  //   } catch (error) {
+  //     console.error("Error parsing stored employees:", error);
+  //   }
+  // } else {
+  //   // Employees data not found in local storage, use initial data from API
 
-    // Store the employees data in local storage
-    storage.setItem("employees", JSON.stringify(employees));
-  }
+  //   // Store the employees data in local storage
+  //   storage.setItem("employees", JSON.stringify(employees));
+  // }
+
+  employees = data.employees;
+
 
 
   let pharmacyOwner;
