@@ -87,10 +87,10 @@
   <div class="service__date">
     <div class="qr-code"></div>
     <div id="time">
-      <!-- {#if showClock == "true"} -->
+      {#if showClock == "true"}
       <span>{time}</span>
       <span class="ampm">{amPm}</span>
-      <!-- {/if} -->
+      {/if}
     </div>
   </div>
   <style>
