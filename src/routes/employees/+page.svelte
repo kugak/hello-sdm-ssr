@@ -5,40 +5,9 @@
   export let data;
   let employees = [];
 
-  // Define storage object with local storage fallback
-  // let storage = null;
-  // try {
-  //   // Attempt to use local storage
-  //   storage = localStorage;
-  // } catch (error) {
-  //   // Local storage not available, fallback to in-memory object
-  //   console.warn("Local storage is not available. Falling back to in-memory storage.");
-  //   storage = {
-  //     getItem: () => null,
-  //     setItem: () => {},
-  //   };
-  // }
-
-  // // Check if employees data exists in local storage
-  // const storedEmployees = storage.getItem("employees");
-  // if (storedEmployees) {
-  //   try {
-  //     employees = JSON.parse(storedEmployees);
-  //   } catch (error) {
-  //     console.error("Error parsing stored employees:", error);
-  //   }
-  // } else {
-  //   // Employees data not found in local storage, use initial data from API
-
-  //   // Store the employees data in local storage
-  //   storage.setItem("employees", JSON.stringify(employees));
-  // }
-
   employees = data.employees;
 
-
-
-  let pharmacyOwner;
+  let pharmacyOwner = "";
   let pharmacyOwnerProfile = "";
   let pharmacyOwnerName = "";
   let pharmacyOwnerTitle = "";
@@ -216,12 +185,14 @@
     font-size: 3rem;
     color: #62b5e5;
     font-weight: 100;
-    padding-bottom: 2rem;
+    /* padding-bottom: 2rem; */
   }
-  .ph__profile-text h2 {
+  .ph__profile-text > h2 {
     font-size: 3.7rem;
     color: #ffffff;
     font-weight: 100;
+    line-height: 1;
+    margin-bottom: 1rem;
   }
   .ph__profile-text p {
     font-size: 1.5rem;
