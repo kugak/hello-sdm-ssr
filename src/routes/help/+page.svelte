@@ -10,7 +10,7 @@
   
     // URL Params
     const showClock = $page.url.searchParams.get("showClock") || "false";
-    console.log(showClock);
+    //console.log(showClock);
     
     let time = ''; // Declare the time variable
     let amPm = ''; // Declare the amPm variable
@@ -58,7 +58,7 @@
                   <div class="icon"><img src={appImg} alt="App Icon"></div>
                 </div>
                 <div class="right-column item-text">
-                  <p>Book on the PC Health App</p>
+                  <p>Book on the PC Health™ App</p>
                 </div>
               </div>
               <div class="container">
