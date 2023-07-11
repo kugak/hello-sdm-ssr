@@ -4,7 +4,7 @@
   
     // URL Params
     const showClock = $page.url.searchParams.get("showClock") || "false";
-    console.log(showClock);
+    //console.log(showClock);
   
     export let data;
     let hours = data.hours;
