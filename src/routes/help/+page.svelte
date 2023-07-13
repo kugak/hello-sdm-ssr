@@ -58,7 +58,7 @@
                   <div class="icon"><img src={appImg} alt="App Icon"></div>
                 </div>
                 <div class="right-column item-text">
-                  <p>Book on the PC Health™ App</p>
+                  <p>Book on the <em>PC Health</em>™ App</p>
                 </div>
               </div>
               <div class="container">
