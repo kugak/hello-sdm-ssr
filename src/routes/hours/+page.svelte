@@ -7,8 +7,8 @@
     //console.log(showClock);
   
     export let data;
-    let hours = data.hours;
-    let openNow = data.hours.open_now;
+    // let hours = data.hours;
+    // let openNow = data.hours.open_now;
   
     let hoursArray = [];
     let time = ''; // Declare the time variable
@@ -65,7 +65,7 @@
         <div class="container">
           <div class="store-hours">
             {#each hoursArray as { day, start, end }}
-            <div class="day {day === getDayOfWeek(new Date().getDay()) && openNow ? 'open-now' : ''}">
+            <div class="day {day === getDayOfWeek(new Date().getDay()) ? 'today' : ''}">
               <span>{day}</span>
               <span>{start} {#if end} - {end} {/if}</span>
             </div>
@@ -133,7 +133,7 @@
       align-items: center;
     }
 
-    .day.open-now, .text-white {
+    .day.today, .text-white {
     color: white;
   }
   

@@ -17,6 +17,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@supabase/supabase-js": "^2.26.0",
 		"axios": "^1.4.0",
 		"svelte-fetch": "^0.2.0",
 		"svelte-motion": "^0.11.5"
