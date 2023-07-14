@@ -7,7 +7,7 @@
     //console.log(showClock);
   
     export let data;
-    // let hours = data.hours;
+    let hours = data.hours;
     // let openNow = data.hours.open_now;
   
     let hoursArray = [];
@@ -15,7 +15,7 @@
     let amPm = ''; // Declare the amPm variable
   
     onMount(() => {
-      hoursArray = data.hours.weekday_text.map(item => {
+      hoursArray = hours.weekday_text.map(item => {
         const [day, timeRange] = item.split(': ');
         let start, end;
   
