@@ -132,13 +132,20 @@
 
 <style>
   @font-face {
-    font-family: "GT Eesti Pro Display";
+    font-family: 'GT Eesti Pro Display';
     src: url("/fonts/GTEestiProDisplay-Regular.woff2") format("woff2");
-    font-weight: unset;
-    font-style: unset;
+    font-weight: normal;
+    font-style: normal;
     font-display: swap;
-    font-weight: 100;
-  }
+}
+
+@font-face {
+    font-family: 'GT Eesti Pro Display Light';
+    src: url('/fonts/GTEestiProDisplay-Light.woff') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
   :root {
     --primary-font: "GT Eesti Pro Display";
   }
@@ -160,7 +167,7 @@
   flex: 1 0 calc(45%);
   padding: 5px 20px 15px 0px;
   font-size: 2.7rem;
-  /* add your desired styles here */
+  font-family: "GT Eesti Pro Display Light";
 }
 
   .ph__container {
@@ -226,7 +233,7 @@
     flex: 1 0 calc(45%);
     padding: 5px 20px 15px 0px;
     font-size: 2.7rem;
-    
+    font-family: "GT Eesti Pro Display Light";
   }
 
   .pharmacist__list,
@@ -294,6 +301,7 @@
     flex: 0 0 calc(29.33%);
     padding: 5px 0px;
     font-size: 2.7rem;
+    font-family: "GT Eesti Pro Display Light";
   }
 
   .pharmacist__team {

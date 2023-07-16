@@ -102,6 +102,8 @@
       gap: 25px;
       width: 600px;
       color: #62b5e5;
+      font-family: 'GT Eesti Pro Display Light';
+
 
     }
 
@@ -111,12 +113,20 @@
     }
 
     @font-face {
-      font-family: "GT Eesti Pro Display";
-      src: url("/fonts/GTEestiProDisplay-Regular.woff2") format("woff2");
-      font-weight: unset;
-      font-style: unset;
-      font-display: swap;
-    }
+    font-family: 'GT Eesti Pro Display';
+    src: url("/fonts/GTEestiProDisplay-Regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'GT Eesti Pro Display Light';
+    src: url('/fonts/GTEestiProDisplay-Light.woff') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
     :root {
       --primary-font: "GT Eesti Pro Display";
     }
