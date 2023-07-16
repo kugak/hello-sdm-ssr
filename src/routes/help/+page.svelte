@@ -58,12 +58,12 @@
                   <div class="icon"><img src={appImg} alt="App Icon"></div>
                 </div>
                 <div class="right-column item-text">
-                  <p>Book on the <em>PC Health</em>™ App</p>
+                  <p>Book on the <em>PC Health™</em> App</p>
                 </div>
               </div>
               <div class="container">
                 <div class="left-column">
-                  <div class="icon"><img src={onlineImg} alt="Online Icon"></div>
+                  <div class="icon last-item"><img src={onlineImg} alt="Online Icon"></div>
                 </div>
                 <div class="right-column item-text">
                   <p>Book at shoppersdrugmart.ca/<br>shoppershealthplus</p>
@@ -131,8 +131,12 @@
     font-weight: 100;
 }
 
+.last-item {
+    margin-top: -0.9em;
+}
+
 .qr_code {
-    left: -5vw;
+    left: -8vw;
     display: flex;
     flex-direction: column;
     position: absolute;

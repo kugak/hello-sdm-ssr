@@ -60,32 +60,47 @@
       </div>
     </div>
     <!-- Pharmacist list -->
-    <div class="pharmacist__list">
-      <h2 class="list__title">Pharmacists:</h2>
-      <div class="list__container">
-        <div class="list__column">
-          {#if pharmacistsList.length > 0}
-            <!-- Display the fetched data -->
-            {#each pharmacistsList as pharmacist}
-              <div class="list__item">
-                {pharmacist.values.Name.slice(3, -3)}
-                {#if pharmacist.values.Title}
-                  <br /><span class="credentials">
-                    {pharmacist.values.Title.slice(3, -3)}
-                  </span>
-                {/if}
-              </div>
-            {/each}
-          {:else if error !== null}
-            <!-- Display error message -->
-            <p>-</p>
-          {:else}
-            <!-- Display loading message or spinner -->
-            <p>...</p>
+<div class="pharmacist__list">
+  <h2 class="list__title">Pharmacists:</h2>
+      <!-- Separate rendering for pharmacists with titles -->
+      {#if pharmacistsList.length > 0}
+      {#each pharmacistsList as pharmacist}
+        {#if pharmacist.values.Title}
+          <div class="pharmacist__with-title">
+            {pharmacist.values.Name.slice(3, -3)}
+            <br /><span class="credentials">
+              {pharmacist.values.Title.slice(3, -3)}
+            </span>
+          </div>
+        {/if}
+      {/each}
+    {/if}
+  <div class="list__container">
+
+
+
+    <!-- List of pharmacists without titles -->
+    <div class="list__column">
+      {#if pharmacistsList.length > 0}
+        <!-- Display the fetched data -->
+        {#each pharmacistsList as pharmacist}
+          {#if !pharmacist.values.Title}
+            <div class="list__item">
+              {pharmacist.values.Name.slice(3, -3)}
+            </div>
           {/if}
-        </div>
-      </div>
+        {/each}
+      {:else if error !== null}
+        <!-- Display error message -->
+        <p>-</p>
+      {:else}
+        <!-- Display loading message or spinner -->
+        <p>...</p>
+      {/if}
     </div>
+
+  </div>
+</div>
 
     <!-- Pharmacist team -->
     <div class="pharmacist__team">
@@ -140,6 +155,13 @@
   .pharmacy {
     padding-bottom: 250px;
   }
+
+  .pharmacist__with-title {
+  flex: 1 0 calc(45%);
+  padding: 5px 20px 15px 0px;
+  font-size: 2.7rem;
+  /* add your desired styles here */
+}
 
   .ph__container {
     max-width: 870px;
@@ -204,6 +226,7 @@
     flex: 1 0 calc(45%);
     padding: 5px 20px 15px 0px;
     font-size: 2.7rem;
+    
   }
 
   .pharmacist__list,

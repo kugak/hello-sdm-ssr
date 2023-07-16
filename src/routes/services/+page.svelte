@@ -166,9 +166,9 @@
     margin: 0;
     padding: 0;
     text-align: center;
-    -webkit-transform: translate(-122px, 187px);
-    -ms-transform: translate(-122px, 187px);
-    transform: translate(-122px, 187px);
+    /* -webkit-transform: translate(-122px, 187px);
+    -ms-transform: translate(-122px, 187px); */
+    transform: translate(-115px, 170px);
     font-size: 3.5rem;
     font-weight: 100;
   }
