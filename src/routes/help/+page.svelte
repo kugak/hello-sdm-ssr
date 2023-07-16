@@ -129,6 +129,7 @@
     text-align: center;
     font-size: 4rem;
     font-weight: 100;
+    font-family: 'GT Eesti Pro Display Light';
 }
 
 .last-item {
