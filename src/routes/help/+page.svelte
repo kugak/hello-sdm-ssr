@@ -50,7 +50,7 @@
                   <div class="icon"><img src={pharmacyImg} alt="Pharmacy Icon"></div>
                 </div>
                 <div class="right-column item-text">
-                  <p>Enquire at the pharmacy desk</p>
+                  <p>Ask at the prescription counter</p>
                 </div>
               </div>
               <div class="container">
@@ -58,7 +58,7 @@
                   <div class="icon"><img src={appImg} alt="App Icon"></div>
                 </div>
                 <div class="right-column item-text">
-                  <p>Book on the <em>PC Health™</em> App</p>
+                  <p>Book on the PC Health™ app</p>
                 </div>
               </div>
               <div class="container">
@@ -141,8 +141,9 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    height: 92vh;
+    height: 93vh;
     justify-content: flex-end;
+    padding-bottom: 80px;
 }
 
 @font-face {
