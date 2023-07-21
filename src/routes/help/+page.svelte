@@ -35,7 +35,7 @@
     updateTime();
     timeInterval = setInterval(() => {
       updateTime();
-    }, 10000);
+    }, 2000);
   });
 
   onDestroy(() => {

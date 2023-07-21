@@ -34,7 +34,7 @@
       updateTime();
       timeInterval = setInterval(() => {
         updateTime();
-      }, 10000);
+      }, 2000);
 
       hoursArray = hours.weekday_text.map(item => {
         const [day, timeRange] = item.split(': ');

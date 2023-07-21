@@ -39,7 +39,7 @@
     // Update the time every second
     timeInterval = setInterval(() => {
       updateTime();
-    }, 1000);
+    }, 2000);
   });
 
   // Clean up the interval when the component is destroyed
