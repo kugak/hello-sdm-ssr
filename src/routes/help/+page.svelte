@@ -13,38 +13,33 @@
     //console.log(showClock);
     
     let time = ''; // Declare the time variable
-  let amPm = ''; // Declare the amPm variable
-  let timeInterval = null; // Declare a variable to store the interval reference
+    let amPm = ''; // Declare the amPm variable
+    let timeInterval = null; // Declare a variable to store the interval reference
 
-  let clockDiv; // Declare the clockDiv variable to store the DOM element
+    let clockDiv; // Declare the clockDiv variable to store the DOM element
 
-  const updateTime = () => {
-    let currentTime = new Date().toLocaleTimeString([], {
-      hour: "numeric",
-      minute: "2-digit",
-    });
+    const updateTime = () => {
+      let currentTime = new Date().toLocaleTimeString([], {
+        hour: "numeric",
+        minute: "2-digit",
+      });
 
     let timeParts = currentTime.split(" ");
     time = timeParts[0];
     amPm = timeParts[1];
 
-    console.log("Updated time:", currentTime);
+    //console.log("Updated time:", currentTime);
   };
 
   onMount(() => {
     updateTime();
     timeInterval = setInterval(() => {
       updateTime();
-    }, 60000);
+    }, 10000);
   });
 
   onDestroy(() => {
     clearInterval(timeInterval);
-  });
-
-  // Use the tick function to update the time every minute (60,000ms)
-  tick(() => {
-    updateTime();
   });
   
   </script>

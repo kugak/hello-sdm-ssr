@@ -1,4 +1,5 @@
 <script>
+  import { onMount, onDestroy } from 'svelte';
   import { page } from "$app/stores";
   import pharmaPlus from "../../images/pharma-plus.png";
 
@@ -19,6 +20,32 @@
   let timeParts = currentTime.split(" "); // Split the time string by space
   let time = timeParts[0]; // Extract the time without AM/PM
   let amPm = timeParts[1]; // Extract the AM/PM designation
+  let timeInterval = null; // Declare a variable to store the interval reference
+
+  const updateTime = () => {
+    let currentTime = new Date().toLocaleTimeString([], {
+      hour: "numeric",
+      minute: "2-digit",
+    });
+
+    let timeParts = currentTime.split(" "); // Split the time string by space
+    time = timeParts[0]; // Assign the value to the time variable
+    amPm = timeParts[1]; // Assign the value to the amPm variable
+  };
+
+  onMount(() => {
+    updateTime(); // Update the time initially
+
+    // Update the time every second
+    timeInterval = setInterval(() => {
+      updateTime();
+    }, 1000);
+  });
+
+  // Clean up the interval when the component is destroyed
+  onDestroy(() => {
+    clearInterval(timeInterval);
+  });
 
 </script>
 
