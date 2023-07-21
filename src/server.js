@@ -19,7 +19,7 @@ export async function get({ fetch }) {
     services = await response.json();
     lastUpdated = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
     showContent = true;
-    console.log('Data fetched successfully', { services });
+    //('Data fetched successfully', { services });
   } catch (e) {
     error = e;
     console.log(e);

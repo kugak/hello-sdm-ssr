@@ -23,6 +23,7 @@
   let timeInterval = null; // Declare a variable to store the interval reference
 
   const updateTime = () => {
+    // Update the time variables with the current time
     let currentTime = new Date().toLocaleTimeString([], {
       hour: "numeric",
       minute: "2-digit",
@@ -30,16 +31,16 @@
 
     let timeParts = currentTime.split(" "); // Split the time string by space
     time = timeParts[0]; // Assign the value to the time variable
-    amPm = timeParts[1]; // Assign the value to the amPm variable
+    amPm = timeParts[1].toUpperCase().replace(/\./g, ""); // Convert to uppercase and remove periods
   };
-
+  
   onMount(() => {
     updateTime(); // Update the time initially
 
     // Update the time every second
     timeInterval = setInterval(() => {
       updateTime();
-    }, 2000);
+    }, 1000); // Update every second (1000ms)
   });
 
   // Clean up the interval when the component is destroyed

@@ -22,7 +22,7 @@ export const load = ({ fetch, url }) => {
       const data = await res.json();
       // Sort the data.items array by index property
       data.items.sort((a, b) => a.index - b.index);
-      console.log(data);
+      //console.log(data);
       return data.items;
     } catch (error) {
       // Log the error to DataDog

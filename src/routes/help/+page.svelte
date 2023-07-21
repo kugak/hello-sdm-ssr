@@ -19,20 +19,21 @@
     let clockDiv; // Declare the clockDiv variable to store the DOM element
 
     const updateTime = () => {
-      let currentTime = new Date().toLocaleTimeString([], {
-        hour: "numeric",
-        minute: "2-digit",
-      });
+    // Update the time variables with the current time
+    let currentTime = new Date().toLocaleTimeString([], {
+      hour: "numeric",
+      minute: "2-digit",
+    });
 
-    let timeParts = currentTime.split(" ");
-    time = timeParts[0];
-    amPm = timeParts[1];
-
-    //console.log("Updated time:", currentTime);
+    let timeParts = currentTime.split(" "); // Split the time string by space
+    time = timeParts[0]; // Assign the value to the time variable
+    amPm = timeParts[1].toUpperCase().replace(/\./g, ""); // Convert to uppercase and remove periods
   };
 
   onMount(() => {
     updateTime();
+    
+    // update time every 2 secs
     timeInterval = setInterval(() => {
       updateTime();
     }, 2000);

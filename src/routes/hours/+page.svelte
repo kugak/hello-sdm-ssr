@@ -25,7 +25,7 @@
 
     let timeParts = currentTime.split(" ");
     time = timeParts[0];
-    amPm = timeParts[1];
+    amPm = timeParts[1].toUpperCase().replace(/\./g, ""); // Convert to uppercase and remove periods
 
     //console.log("Updated time:", currentTime);
   };    
@@ -64,7 +64,7 @@
   
       let timeParts = currentTime.split(" "); // Split the time string by space
       time = timeParts[0]; // Assign the value to the time variable
-      amPm = timeParts[1]; // Assign the value to the amPm variable
+      amPm = timeParts[1].toUpperCase().replace(/\./g, ""); // Convert to uppercase and remove periods
     });
   
     const getDayOfWeek = (day) => {
@@ -79,6 +79,8 @@
     let error = null;
   
   </script>
+
+  
   
   {#if hoursArray.length > 0}
   <section class="pharmacy pharmacy__service">
