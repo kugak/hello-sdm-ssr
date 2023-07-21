@@ -32,7 +32,7 @@
 
   onMount(() => {
     updateTime();
-    
+
     // update time every 2 secs
     timeInterval = setInterval(() => {
       updateTime();
@@ -74,7 +74,7 @@
                   <div class="icon"><img src={appImg} alt="App Icon"></div>
                 </div>
                 <div class="right-column item-text">
-                  <p>Book on the PC Health™ app</p>
+                  <p>Book on the PC Health<sup class="tm">TM</sup> app</p>
                 </div>
               </div>
               <div class="container">
@@ -146,6 +146,10 @@
     font-size: 4rem;
     font-weight: 100;
     font-family: 'GT Eesti Pro Display Light';
+}
+
+sup.tm{
+    font-size: 20px;
 }
 
 .last-item {
