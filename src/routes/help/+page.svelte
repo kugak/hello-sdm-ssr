@@ -1,5 +1,5 @@
 <script>
-    import { onMount } from 'svelte';
+    import { onMount, onDestroy, tick } from 'svelte';
     import { page } from "$app/stores";
     import careImg from "../../images/care.png";
     import appImg from "../../images/app.png";
@@ -13,19 +13,39 @@
     //console.log(showClock);
     
     let time = ''; // Declare the time variable
-    let amPm = ''; // Declare the amPm variable
-  
-    onMount(() => {
- 
-        let currentTime = new Date().toLocaleTimeString([], {
-        hour: "numeric",
-        minute: "2-digit",
-      });
-  
-      let timeParts = currentTime.split(" "); // Split the time string by space
-      time = timeParts[0]; // Assign the value to the time variable
-      amPm = timeParts[1]; // Assign the value to the amPm variable
+  let amPm = ''; // Declare the amPm variable
+  let timeInterval = null; // Declare a variable to store the interval reference
+
+  let clockDiv; // Declare the clockDiv variable to store the DOM element
+
+  const updateTime = () => {
+    let currentTime = new Date().toLocaleTimeString([], {
+      hour: "numeric",
+      minute: "2-digit",
     });
+
+    let timeParts = currentTime.split(" ");
+    time = timeParts[0];
+    amPm = timeParts[1];
+
+    console.log("Updated time:", currentTime);
+  };
+
+  onMount(() => {
+    updateTime();
+    timeInterval = setInterval(() => {
+      updateTime();
+    }, 60000);
+  });
+
+  onDestroy(() => {
+    clearInterval(timeInterval);
+  });
+
+  // Use the tick function to update the time every minute (60,000ms)
+  tick(() => {
+    updateTime();
+  });
   
   </script>
   
@@ -86,12 +106,12 @@
   <!-- Time -->
   <div class="service__date">
     <div class="qr-code"></div>
-    <div id="time">
-      {#if showClock == "true"}
-      <span>{time}</span>
-      <span class="ampm">{amPm}</span>
-      {/if}
-    </div>
+    {#if showClock == "true"}
+      <div id="time" bind:this="{clockDiv}">
+        <span>{time}</span>
+        <span class="ampm">{amPm}</span>
+      </div>
+    {/if}
   </div>
   <style>
 
@@ -141,9 +161,9 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    height: 93vh;
+    bottom: 0;
     justify-content: flex-end;
-    padding-bottom: 80px;
+    padding-bottom: 105px;
 }
 
 @font-face {
