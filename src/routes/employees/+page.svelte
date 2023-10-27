@@ -54,53 +54,71 @@
       </div>
       <!-- Text -->
       <div class="ph__profile-text">
-        <h3>Pharmacist Owner</h3>
-        <h2>{pharmacyOwnerName}</h2>
-        <p class="credentials">{pharmacyOwnerTitle}</p>
-      </div>
-    </div>
-    <!-- Pharmacist list -->
-<div class="pharmacist__list">
-  <h2 class="list__title">Pharmacists:</h2>
-      <!-- Separate rendering for pharmacists with titles -->
-      {#if pharmacistsList.length > 0}
-      {#each pharmacistsList as pharmacist}
-        {#if pharmacist.values.Title}
-          <div class="pharmacist__with-title">
-            {pharmacist.values.Name.slice(3, -3)}
-            <br /><span class="credentials">
-              {pharmacist.values.Title.slice(3, -3)}
-            </span>
+        {#if pharmacyOwnerTitle}
+          <!-- Render this if pharmacyOwnerTitle has a value -->
+          <h3>Pharmacist Owner</h3>
+          <h2>{pharmacyOwnerName}</h2>
+          <p class="credentials">{pharmacyOwnerTitle}</p>
+        {:else}
+          <!-- Render this if pharmacyOwnerTitle is empty -->
+          <div class="no-owner-title-section">
+            <h3>Pharmacist Owner</h3>
+            <h2>{pharmacyOwnerName}</h2>
           </div>
         {/if}
-      {/each}
-    {/if}
-  <div class="list__container">
-
-
-
-    <!-- List of pharmacists without titles -->
-    <div class="list__column">
+      </div>
+      
+    </div>
+    <!-- Pharmacist list -->
+    <div class="pharmacist__list">
+      <h2 class="list__title">Pharmacists:</h2>
+      <!-- Separate rendering for pharmacists with titles -->
       {#if pharmacistsList.length > 0}
-        <!-- Display the fetched data -->
+      <div class="pharmacist__container">
         {#each pharmacistsList as pharmacist}
-          {#if !pharmacist.values.Title}
-            <div class="list__item">
+          {#if pharmacist.values.Title}
+          <div class="pharmacist__with-title">
+            <div class="pharmacist__name">
               {pharmacist.values.Name.slice(3, -3)}
             </div>
+            <div class="pharmacist__credentials">
+              {#if pharmacist.values.Title.slice(3, -3)} <!-- Check if Title has a value -->
+                <span class="credentials">
+                  {pharmacist.values.Title.slice(3, -3)}
+                </span>
+              {/if}
+            </div>
+          </div>
           {/if}
         {/each}
-      {:else if error !== null}
-        <!-- Display error message -->
-        <p>-</p>
-      {:else}
-        <!-- Display loading message or spinner -->
-        <p>...</p>
+        <div class="spacer"></div>
+      </div>
+      
+      <div class="list__container">
+        <!-- List of pharmacists without titles -->
+        <div class="list__column">
+          {#if pharmacistsList.length > 0}
+            <!-- Display the fetched data -->
+            {#each pharmacistsList as pharmacist}
+              {#if !pharmacist.values.Title}
+              <div class="list__item">
+                {pharmacist.values.Name.slice(3, -3)}
+              </div>
+              {/if}
+            {/each}
+          {:else if error !== null}
+            <!-- Display error message -->
+            <p>-</p>
+          {:else}
+            <!-- Display loading message or spinner -->
+            <p>...</p>
+          {/if}
+        </div>
+      </div>
       {/if}
     </div>
 
-  </div>
-</div>
+    
 
     <!-- Pharmacist team -->
     <div class="pharmacist__team">
@@ -164,11 +182,25 @@
   }
 
   .pharmacist__with-title {
-  flex: 1 0 calc(45%);
-  padding: 5px 20px 15px 0px;
-  font-size: 2.7rem;
-  font-family: "GT Eesti Pro Display Light";
-}
+    flex: 1 0 calc(45%);
+    padding: 5px 20px 15px 0px;
+    font-size: 2.7rem;
+    font-family: "GT Eesti Pro Display Light";
+    display: flex;
+    flex-direction: column; /* Display the title below the name */
+  }
+
+  .pharmacist__name {
+    font-size: 2.7rem;
+    font-family: "GT Eesti Pro Display Light";
+    margin-bottom: 5px;
+  }
+
+  .pharmacist__credentials {
+    font-size: 1.5rem;
+    color: #ffffff;
+    font-weight: 100;
+  }
 
   .ph__container {
     max-width: 870px;
@@ -230,8 +262,8 @@
   }
 
   .list__item {
-    flex: 1 0 calc(45%);
-    padding: 5px 20px 15px 0px;
+    flex: 0 0 calc(50% - 10px);
+    padding: 5px 0px 15px 0;
     font-size: 2.7rem;
     font-family: "GT Eesti Pro Display Light";
   }
@@ -241,6 +273,23 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 0 40px;
+    min-height: 450px;
+  }
+
+  .pharmacist__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    min-height: 450px;
+    
+  }
+
+    .pharmacist__container {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next row */
+    align-items: stretch;
+    gap: 20px; /* Add a gap between the columns */
+    margin-top: -10px;
   }
 
   .credentials {
@@ -249,45 +298,37 @@
     font-weight: 100;
   }
 
+  .spacer {
+    height: 30px;
+  }
+
   .list__title {
     font-size: 3rem;
     color: #62b5e5;
-    padding-bottom: 15px;
+    margin-bottom: 30px;
     font-weight: 100;
-  }
-
-  .pharmacist__list {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    min-height: 450px;
-  }
-
-  .list__title {
-    margin-bottom: 20px;
+    width: 100%;
   }
 
   .list__container {
-    display: flex;
-    gap: 20px;
-    justify-content: space-between;
-  }
+  display: flex;
+  width: 850px;
+  flex-wrap: wrap; /* Create a two-column layout */
+  gap: 20px;
+  justify-content: flex-start; /* Align items to the top left */
+  flex-direction: column;
+}
 
-  .list__column {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 10px;
-  }
-
+.list__column {
+  flex: 0 0 calc(50% - 10px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
   .pharmacist__team {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  .list__title {
-    margin-bottom: 20px;
   }
 
   .team__container {
