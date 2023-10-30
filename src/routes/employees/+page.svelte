@@ -336,6 +336,7 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     gap: 10px;
+    width: 800px;
   }
 
   .team__member {
