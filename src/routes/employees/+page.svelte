@@ -121,25 +121,19 @@
     
 
     <!-- Pharmacist team -->
-    <div class="pharmacist__team">
-      <h2 class="list__title">Pharmacy Team:</h2>
-      <div class="team__container">
-        {#if pharmacyTeam.length > 0}
+    {#if pharmacyTeam.length > 0}
+      <div class="pharmacist__team">
+        <h2 class="list__title">Pharmacy Team:</h2>
+        <div class="team__container">
           <!-- Display the fetched data -->
           {#each pharmacyTeam as team}
             <div class="team__member">
               {team.values.Name.slice(3, -3)}
             </div>
           {/each}
-        {:else if error !== null}
-          <!-- Display error message -->
-          <p>-</p>
-        {:else}
-          <!-- Display loading message or spinner -->
-          <p>...</p>
-        {/if}
+        </div>
       </div>
-    </div>
+    {/if}
 
     <!-- bottome shape -->
     <div class="pharmacy__bottom-shape">
