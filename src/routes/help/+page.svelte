@@ -82,7 +82,7 @@
                   <div class="icon last-item"><img src={onlineImg} alt="Online Icon"></div>
                 </div>
                 <div class="right-column item-text">
-                  <p>Book at shoppersdrugmart.ca/<br>shoppershealthplus</p>
+                  <p>Book at shoppersdrugmart.ca/<br>pharmacistclinic</p>
                 </div>
               </div>
     
