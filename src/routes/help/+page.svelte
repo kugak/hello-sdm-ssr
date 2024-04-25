@@ -92,9 +92,9 @@
       </div>
     </div>
        <!-- QR -->
-       <div class="qr_code">
+       <!-- <div class="qr_code">
         <img src={qrImg} alt="Online Icon">
-      </div>
+      </div> -->
   </section>
 
  
