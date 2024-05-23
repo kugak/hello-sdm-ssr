@@ -7,10 +7,10 @@ export const load = ({ fetch, url }) => {
   
   const fetchEmployees = async () => {
     const searchParams = new URLSearchParams(url.search);
-    const pageId = searchParams.get("pid") || "JPDW7_bTYb";
+    const locationId = searchParams.get("location_id") || "JPDW7_bTYb";
     const tableId = searchParams.get("tid") || "grid-h5ed1eQGwZ";
     try {
-      const res = await fetch(`https://coda.io/apis/v1/docs/${pageId}/tables/${tableId}/rows?useColumnNames=true&valueFormat=rich&query=isPlaying:"true"`, {
+      const res = await fetch(`https://coda.io/apis/v1/docs/${locationId}/tables/${tableId}/rows?useColumnNames=true&valueFormat=rich&query=isPlaying:"true"`, {
         headers: {
           Authorization: `${PUBLIC_CODA_KEY}`,
         },
@@ -39,7 +39,7 @@ export const load = ({ fetch, url }) => {
         deviceName: "",
         host: "",
         priority: "normal",
-        source: `${pageId}-${tableId}`,
+        source: `${locationId}-${tableId}`,
         tags: [
           `environment:prod`,
           "app:SDM FOP",
