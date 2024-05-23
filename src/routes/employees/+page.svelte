@@ -75,7 +75,7 @@
     </div>
     <!-- Pharmacist list -->
     <div class="pharmacist__list">
-      <h2 class="list__title">{localization.pharmacistsHeader}:</h2>
+      <h2 class="list__title">{localization.pharmacistsHeader}</h2>
       <!-- Separate rendering for pharmacists with titles -->
       {#if pharmacistsList.length > 0}
       <div class="pharmacist__container">
@@ -127,7 +127,7 @@
     <!-- Pharmacist team -->
     {#if pharmacyTeam.length > 0}
       <div class="pharmacist__team">
-        <h2 class="list__title">{localization.pharmacyTeamHeader}:</h2>
+        <h2 class="list__title">{localization.pharmacyTeamHeader}</h2>
         <div class="team__container">
           <!-- Display the fetched data -->
           {#each pharmacyTeam as team}
