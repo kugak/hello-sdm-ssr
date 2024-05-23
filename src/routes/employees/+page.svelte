@@ -4,6 +4,10 @@
 
   export let data;
   let employees = [];
+  let { localization } = data.supabaseContent;
+  console.log('Localization Data:');
+  console.log(localization);
+
 
   employees = data.employees;
 
@@ -56,13 +60,13 @@
       <div class="ph__profile-text">
         {#if pharmacyOwnerTitle}
           <!-- Render this if pharmacyOwnerTitle has a value -->
-          <h3>Pharmacist Owner</h3>
+          <h3>{localization.pharmacyOwnerHeader}</h3>
           <h2>{pharmacyOwnerName}</h2>
           <p class="credentials">{pharmacyOwnerTitle}</p>
         {:else}
           <!-- Render this if pharmacyOwnerTitle is empty -->
           <div class="no-owner-title-section">
-            <h3>Pharmacist Owner</h3>
+            <h3>{localization.pharmacyOwnerHeader}</h3>
             <h2>{pharmacyOwnerName}</h2>
           </div>
         {/if}
@@ -71,7 +75,7 @@
     </div>
     <!-- Pharmacist list -->
     <div class="pharmacist__list">
-      <h2 class="list__title">Pharmacists:</h2>
+      <h2 class="list__title">{localization.pharmacistsHeader}:</h2>
       <!-- Separate rendering for pharmacists with titles -->
       {#if pharmacistsList.length > 0}
       <div class="pharmacist__container">

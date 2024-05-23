@@ -8,6 +8,10 @@
 
   export let data;
   let services = [];
+  let { hasClock, localization } = data.supabaseContent;
+  console.log('Clock? ' + hasClock);
+  console.log('Localization Data:');
+  console.log(localization);
 
   services = data.services;
 
@@ -81,7 +85,7 @@
   <!-- Time -->
   <div class="service__date">
     <div id="time">
-      {#if showClock == "true"}
+      {#if hasClock == "true"}
       <span>{time}</span>
       <span class="ampm">{amPm}</span>
       {/if}

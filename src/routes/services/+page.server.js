@@ -1,4 +1,7 @@
-  import { PUBLIC_CODA_KEY, PUBLIC_DD_API_KEY } from "$env/static/public";
+import { PUBLIC_CODA_KEY, PUBLIC_DD_API_KEY, PUBLIC_SUPERBASE_URL, PUBLIC_SUPERBASE_KEY } from "$env/static/public";
+import { createClient } from '@supabase/supabase-js';
+
+const supabase = createClient(PUBLIC_SUPERBASE_URL, PUBLIC_SUPERBASE_KEY);
 
 export const load = ({ fetch, url }) => {
   
@@ -62,7 +65,45 @@ export const load = ({ fetch, url }) => {
     }
   };
 
+  const fetchSupabase = async () => {
+
+    const searchParams = new URLSearchParams(url.search);
+    const contentId = searchParams.get("content_id") || "clur0po918ow908u93i1df0lk";
+    const lang = searchParams.get("lang") || "en";
+
+    try {
+      const { data, error } = await supabase
+        .from('pagecontent')
+        .select('content')
+        .eq('content_id', contentId)
+        .single();
+        console.log(data);
+
+      if (error) throw error;
+
+      const { hasClock, localizations } = data.content;
+      const localization = localizations.find(loc => loc.locale === lang);
+
+
+      if (!localization) {
+        throw new Error(`Localization for language ${lang} not found`);
+      }
+      
+      console.log(hasClock);
+      console.log(localization);
+
+      return { hasClock, localization };
+      
+
+
+    } catch (error) {
+      console.error('Error fetching titles from Supabase:', error);
+      throw error;
+    }
+  };
+
   return {
     services: fetchServices(),
+    supabaseContent: fetchSupabase(),
   };
 };
