@@ -238,7 +238,7 @@
   .ph__profile-text {
     padding-left: 50px;
     font-weight: 100;
-    line-height: 0;
+    /* line-height: 0; */
   }
   .ph__profile-text h3 {
     font-size: 3rem;
