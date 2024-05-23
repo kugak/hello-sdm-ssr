@@ -127,7 +127,7 @@
     <!-- Pharmacist team -->
     {#if pharmacyTeam.length > 0}
       <div class="pharmacist__team">
-        <h2 class="list__title">Pharmacy Team:</h2>
+        <h2 class="list__title">{localization.pharmacyTeamHeader}:</h2>
         <div class="team__container">
           <!-- Display the fetched data -->
           {#each pharmacyTeam as team}
