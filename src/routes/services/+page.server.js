@@ -7,10 +7,10 @@ export const load = ({ fetch, url }) => {
   
   const fetchServices = async () => {
     const searchParams = new URLSearchParams(url.search);
-    const pageId = searchParams.get("pid") || "JPDW7_bTYb";
+    const locationId = searchParams.get("locatio_id") || "JPDW7_bTYb";
     const tableId = searchParams.get("tid") || "grid-vfXh3vEkTg";
     try {
-      const res = await fetch(`https://coda.io/apis/v1/docs/${pageId}/tables/${tableId}/rows?useColumnNames=true&valueFormat=rich&query=isPlaying:"true"`, {
+      const res = await fetch(`https://coda.io/apis/v1/docs/${locationId}/tables/${tableId}/rows?useColumnNames=true&valueFormat=rich&query=isPlaying:"true"`, {
         headers: {
           Authorization: `${PUBLIC_CODA_KEY}`,
         },
@@ -41,14 +41,14 @@ export const load = ({ fetch, url }) => {
         deviceName: "",
         host: "",
         priority: "normal",
-        source: `${pageId}-${tableId}`,
+        source: `${locationId}-${tableId}`,
         tags: [
           `environment:prod`,
           "app:SDM FOP",
           "service:Custom",
-          `version:${pageId}`,
+          `version:${locationId}`,
           "event:fetchData",
-          `tag:'servicesPage-'${pageId}-${tableId}`,
+          `tag:'servicesPage-'${locationId}-${tableId}`,
       ],
       };
 
@@ -77,7 +77,7 @@ export const load = ({ fetch, url }) => {
         .select('content')
         .eq('content_id', contentId)
         .single();
-        console.log(data);
+        // console.log(data);
 
       if (error) throw error;
 
@@ -89,8 +89,8 @@ export const load = ({ fetch, url }) => {
         throw new Error(`Localization for language ${lang} not found`);
       }
       
-      console.log(hasClock);
-      console.log(localization);
+      // console.log(hasClock);
+      // console.log(localization);
 
       return { hasClock, localization };
       

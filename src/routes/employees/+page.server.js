@@ -75,7 +75,7 @@ export const load = ({ fetch, url }) => {
         .select('content')
         .eq('content_id', contentId)
         .single();
-        console.log(data);
+        // console.log(data);
 
       if (error) throw error;
 
@@ -87,7 +87,7 @@ export const load = ({ fetch, url }) => {
         throw new Error(`Localization for language ${lang} not found`);
       }
       
-      console.log(localization);
+      // console.log(localization);
 
       return { localization };
       
