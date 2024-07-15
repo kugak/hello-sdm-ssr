@@ -22,8 +22,17 @@
   );
   pharmacyOwner = pharmacyOwner[0].values;
   pharmacyOwnerProfile = pharmacyOwner.Image[0].url;
-  pharmacyOwnerName = pharmacyOwner.Name.slice(3, -3);
-  pharmacyOwnerTitle = pharmacyOwner.Title.slice(3, -3);
+  pharmacyOwnerName = formatText(pharmacyOwner.Name);
+  pharmacyOwnerTitle = formatText(pharmacyOwner.Title);
+  console.log(pharmacyOwnerTitle);
+
+  function formatText(input) {
+    if (input.startsWith("```") && input.endsWith("```")) {
+      return input.slice(3, -3);
+    } else {
+      return input;
+    }
+  }
 
   pharmacistsList = employees
     .filter(
@@ -67,58 +76,56 @@
           </div>
         {/if}
       </div>
-      
     </div>
     <!-- Pharmacist list -->
     <div class="pharmacist__list">
       <h2 class="list__title">Pharmacists:</h2>
       <!-- Separate rendering for pharmacists with titles -->
       {#if pharmacistsList.length > 0}
-      <div class="pharmacist__container">
-        {#each pharmacistsList as pharmacist}
-          {#if pharmacist.values.Title}
-          <div class="pharmacist__with-title">
-            <div class="pharmacist__name">
-              {pharmacist.values.Name.slice(3, -3)}
-            </div>
-            <div class="pharmacist__credentials">
-              {#if pharmacist.values.Title.slice(3, -3)} <!-- Check if Title has a value -->
-                <span class="credentials">
-                  {pharmacist.values.Title.slice(3, -3)}
-                </span>
-              {/if}
-            </div>
-          </div>
-          {/if}
-        {/each}
-        <div class="spacer"></div>
-      </div>
-      
-      <div class="list__container">
-        <!-- List of pharmacists without titles -->
-        <div class="list__column">
-          {#if pharmacistsList.length > 0}
-            <!-- Display the fetched data -->
-            {#each pharmacistsList as pharmacist}
-              {#if !pharmacist.values.Title}
-              <div class="list__item">
-                {pharmacist.values.Name.slice(3, -3)}
+        <div class="pharmacist__container">
+          {#each pharmacistsList as pharmacist}
+            {#if pharmacist.values.Title}
+              <div class="pharmacist__with-title">
+                <div class="pharmacist__name">
+                  {formatText(pharmacist.values.Name)}
+                </div>
+                <div class="pharmacist__credentials">
+                  {#if formatText(pharmacist.values.Title)}
+                    <!-- Check if Title has a value -->
+                    <span class="credentials">
+                      {formatText(pharmacist.values.Title)}
+                    </span>
+                  {/if}
+                </div>
               </div>
-              {/if}
-            {/each}
-          {:else if error !== null}
-            <!-- Display error message -->
-            <p>-</p>
-          {:else}
-            <!-- Display loading message or spinner -->
-            <p>...</p>
-          {/if}
+            {/if}
+          {/each}
+          <div class="spacer"></div>
         </div>
-      </div>
+
+        <div class="list__container">
+          <!-- List of pharmacists without titles -->
+          <div class="list__column">
+            {#if pharmacistsList.length > 0}
+              <!-- Display the fetched data -->
+              {#each pharmacistsList as pharmacist}
+                {#if !pharmacist.values.Title}
+                  <div class="list__item">
+                    {formatText(pharmacist.values.Name)}
+                  </div>
+                {/if}
+              {/each}
+            {:else if error !== null}
+              <!-- Display error message -->
+              <p>-</p>
+            {:else}
+              <!-- Display loading message or spinner -->
+              <p>...</p>
+            {/if}
+          </div>
+        </div>
       {/if}
     </div>
-
-    
 
     <!-- Pharmacist team -->
     {#if pharmacyTeam.length > 0}
@@ -128,7 +135,7 @@
           <!-- Display the fetched data -->
           {#each pharmacyTeam as team}
             <div class="team__member">
-              {team.values.Name.slice(3, -3)}
+              {formatText(team.values.Name)}
             </div>
           {/each}
         </div>
@@ -144,20 +151,20 @@
 
 <style>
   @font-face {
-    font-family: 'GT Eesti Pro Display';
+    font-family: "GT Eesti Pro Display";
     src: url("/fonts/GTEestiProDisplay-Regular.woff2") format("woff2");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
-}
+  }
 
-@font-face {
-    font-family: 'GT Eesti Pro Display Light';
-    src: url('/fonts/GTEestiProDisplay-Light.woff') format('woff2');
+  @font-face {
+    font-family: "GT Eesti Pro Display Light";
+    src: url("/fonts/GTEestiProDisplay-Light.woff") format("woff2");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
-}
+  }
   :root {
     --primary-font: "GT Eesti Pro Display";
   }
@@ -275,15 +282,15 @@
     flex-wrap: wrap;
     align-content: flex-start;
     min-height: 450px;
-    
   }
 
-    .pharmacist__container {
+  .pharmacist__container {
     display: flex;
     flex-wrap: wrap; /* Allow items to wrap to the next row */
     align-items: stretch;
     gap: 20px; /* Add a gap between the columns */
     margin-top: -10px;
+    width: 100%;
   }
 
   .credentials {
@@ -305,20 +312,20 @@
   }
 
   .list__container {
-  display: flex;
-  width: 850px;
-  flex-wrap: wrap; /* Create a two-column layout */
-  gap: 20px;
-  justify-content: flex-start; /* Align items to the top left */
-  flex-direction: column;
-}
+    display: flex;
+    width: 850px;
+    flex-wrap: wrap; /* Create a two-column layout */
+    gap: 20px;
+    justify-content: flex-start; /* Align items to the top left */
+    flex-direction: column;
+  }
 
-.list__column {
-  flex: 0 0 calc(50% - 10px);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
+  .list__column {
+    flex: 0 0 calc(50% - 10px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
   .pharmacist__team {
     display: flex;
     flex-direction: column;
