@@ -70,10 +70,8 @@
           <p class="credentials">{pharmacyOwnerTitle}</p>
         {:else}
           <!-- Render this if pharmacyOwnerTitle is empty -->
-          <div class="no-owner-title-section">
-            <h3>Pharmacist Owner</h3>
-            <h2>{pharmacyOwnerName}</h2>
-          </div>
+          <h3>Pharmacist Owner</h3>
+          <h2>{pharmacyOwnerName}</h2>
         {/if}
       </div>
     </div>
